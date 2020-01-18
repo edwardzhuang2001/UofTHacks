@@ -1,3 +1,15 @@
-.hey{
-  background-color: black;
+.black-header{
+  color: black;
+}
+
+.jumbotron{
+  background-color: orange;
+}
+
+.card{
+  background-color: lightblue;
+}
+
+a:hover{
+  color: navy;
 }

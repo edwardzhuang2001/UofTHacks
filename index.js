@@ -76,7 +76,7 @@ app.post('/login',
 app.get("/logout", function(req, res){
   req.logout()
   req.flash("success", "Logged you out!");
-  res.redirect("/blogs");
+  res.redirect("/");
 })
 app.listen(3000,function(req, res){
   console.log("Hello world")

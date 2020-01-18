@@ -24,6 +24,13 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());  
 
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
+  next();
+});
+
 app.set("view engine", "ejs");
 
 app.get("/",function(req, res){
@@ -56,9 +63,21 @@ app.post("/signup",function(req, res){
 app.get("/login", function(req, res){
   res.render("login")
 })
-app.post("/login",
-  passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/login' }));
+app.post('/login',
+  passport.authenticate('local', {
+    failureRedirect: '/login',
+    failureFlash: true
+  }),
+  (req, res) => {
+    req.flash('success', 'You\'ve successfully logged in!');
+    res.redirect('/');
+  }
+);
+app.get("/logout", function(req, res){
+  req.logout()
+  req.flash("success", "Logged you out!");
+  res.redirect("/blogs");
+})
 app.listen(3000,function(req, res){
   console.log("Hello world")
 })

@@ -1,6 +1,12 @@
 <%- include('./partials/header') %>
 
-    <h1>Welcome to the Course Rater for McMaster University</h1>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Course Rater for McMaster University</h1>
+            <p class="lead">Below are some of the popular courses browsed on this website</p>
+        </div>
+    </div>
+
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -9,14 +15,31 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <h2>ENGINEER 1P03</h2>
-                <img src="/images/robert_fleisig.jpg" class="d-block w-100" alt="Dr. Robert Fleisig">
+                <div class="jumbotron">
+                    <h1 class="display-6">ENGINEER 1P03</h1>
+                    <hr class="my-4">
+                    <p class="lead">Best Voted Prof for this Course</p>
+                    <p>Dr. Robert Fleisig</p>
+                    <img src="/images/robert_fleisig.jpg" height="200px" class="d-block w-20" alt="Dr. Robert Fleisig">
+                </div>
             </div>
             <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
+                <div class="jumbotron">
+                    <h1 class="display-6">PHYSICS 1D03</h1>
+                    <hr class="my-4">
+                    <p class="lead">Best Voted Prof for this Course</p>
+                    <p>Dr. Reza Nejat</p>
+                    <img src="/images/reza_nejat.jpg" height="200px" class="d-block w-20" alt="Dr. Reza Nejat">
+                </div>
             </div>
             <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
+                <div class="jumbotron">
+                    <h1 class="display-6">MATH 1ZB3</h1>
+                    <hr class="my-4">
+                    <p class="lead">Best Voted Prof for this Course</p>
+                    <p>Dr. Aaron Childs</p>
+                    <img src="/images/aaron_childs.jpg" height="200px" class="d-block w-20" alt="Dr. Aaron Childs">
+                </div>
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

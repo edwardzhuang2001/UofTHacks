@@ -6,11 +6,18 @@ var express = require("express")
     bodyParser = require("body-parser")
     LocalStrategy = require("passport-local")
     passport = require("passport")
-
+    flash = require("connect-flash")
+    
 mongoose.connect("mongodb://localhost/work",{ useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(flash())
+app.use(require("express-session")({
+  secret: "welcome",
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -32,23 +39,32 @@ app.get("/login", function(req, res){
   res.render("login")
 })
 app.post("/signup",function(req, res){
-  var User = new User({
+  var newUser = new User({
     username: req.body.username,
-    password: req.body.lastname,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email
   })
+  User.register(newUser, req.body.password, function(err, newUser){
+    if(err){
+      console.log(err)
+      res.render("register")
+    }
+    passport.authenticate("local")(req, res, function(){
+      res.redirect("/")
+    })
+  })
 })
-// app.post("/login",
-// passport.authenticate('local', {
-//   failureRedirect: '/login',
-//   failureFlash: true
-// }),
-// function(req, res){
-//   req.flash('success', 'You\'ve successfully logged in!');
-//   res.redirect('/blogs');
-// })
+app.post('/login',
+  passport.authenticate('local', {
+    failureRedirect: '/login',
+    failureFlash: true
+  }),
+  (req, res) => {
+    req.flash('success', 'You\'ve successfully logged in!');
+    res.redirect('/');
+  }
+);
 app.listen(3000,function(req, res){
   console.log("Hello world")
 })

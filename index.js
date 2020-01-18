@@ -3,10 +3,19 @@ var express = require("express")
     path = require("path")
     mongoose = require("mongoose")
     User = require("./models/user")
-
+    bodyParser = require("body-parser")
+    LocalStrategy = require("passport-local")
+    passport = require("passport")
 
 mongoose.connect("mongodb://localhost/work",{ useNewUrlParser: true });
-app.use(express.static(path.join(__dirname, 'public')))  
+
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());  
 
 app.set("view engine", "ejs");
 
@@ -23,7 +32,13 @@ app.get("/login", function(req, res){
   res.render("login")
 })
 app.post("/signup",function(req, res){
-  res.send("Welcome to the post route")
+  var User = new User({
+    username: req.body.username,
+    password: req.body.lastname,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    email: req.body.email
+  })
 })
 // app.post("/login",
 // passport.authenticate('local', {

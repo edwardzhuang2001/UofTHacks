@@ -35,9 +35,6 @@ app.get("/1p03",function(req,res){
 app.get("/signup", function(req,res){
   res.render("register")
 })
-app.get("/login", function(req, res){
-  res.render("login")
-})
 app.post("/signup",function(req, res){
   var newUser = new User({
     username: req.body.username,
@@ -51,20 +48,17 @@ app.post("/signup",function(req, res){
       res.render("register")
     }
     passport.authenticate("local")(req, res, function(){
+      console.log(newUser)
       res.redirect("/")
     })
   })
 })
-app.post('/login',
-  passport.authenticate('local', {
-    failureRedirect: '/login',
-    failureFlash: true
-  }),
-  (req, res) => {
-    req.flash('success', 'You\'ve successfully logged in!');
-    res.redirect('/');
-  }
-);
+app.get("/login", function(req, res){
+  res.render("login")
+})
+app.post("/login",
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login' }));
 app.listen(3000,function(req, res){
   console.log("Hello world")
 })

@@ -1,7 +1,11 @@
 var express = require("express")
     app = express()
-    path = require('path')
+    path = require("path")
+    mongoose = require("mongoose")
+    User = require("./models/user")
 
+
+mongoose.connect("mongodb://localhost/work",{ useNewUrlParser: true });
 app.use(express.static(path.join(__dirname, 'public')))  
 
 app.set("view engine", "ejs");
@@ -12,8 +16,14 @@ app.get("/",function(req, res){
 app.get("/1p03",function(req,res){
   res.render("1P03")
 })
+app.get("/signup", function(req,res){
+  res.render("register")
+})
 app.get("/login", function(req, res){
   res.render("login")
+})
+app.post("/signup",function(req, res){
+  res.send("Welcome to the post route")
 })
 // app.post("/login",
 // passport.authenticate('local', {

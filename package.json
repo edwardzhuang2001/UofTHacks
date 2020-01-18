@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ahmed-nazir/UofTHacks/issues"
   },
-  "homepage": "https://github.com/ahmed-nazir/UofTHacks#readme"
+  "homepage": "https://github.com/ahmed-nazir/UofTHacks#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }

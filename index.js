@@ -12,6 +12,18 @@ app.get("/",function(req, res){
 app.get("/1p03",function(req,res){
   res.render("1P03")
 })
+app.get("/login", function(req, res){
+  res.render("login")
+})
+app.post("/login",
+passport.authenticate('local', {
+  failureRedirect: '/login',
+  failureFlash: true
+}),
+function(req, res){
+  req.flash('success', 'You\'ve successfully logged in!');
+  res.redirect('/blogs');
+})
 app.listen(3000,function(req, res){
   console.log("Hello world")
 })

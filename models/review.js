@@ -8,8 +8,8 @@ var reviewSchema = new mongoose.Schema({
         },
         username: String
     },
-    image: String,
     created: {type: Date, default: Date.now},
-    text: String
+    text: String,
+    prof_name: String
 })
 module.exports = mongoose.model("Review", reviewSchema)

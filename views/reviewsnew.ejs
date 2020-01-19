@@ -1,0 +1,43 @@
+<%- include('./partials/header') %>
+
+<div class="container" style="margin:100px auto;">
+  <div class="row">
+    <div class="col-4"></div>
+      <div class="col-4">
+        <div class="row">
+          <div class="col-12"><div style="text-align: center;margin-bottom: 10px;font-size: 30px;">Add new review</div></div>
+        </div>
+      </div>
+      <div class="col-4"></div>
+  </div>
+  <form action="/courses/<%=courseid%>/reviews" method="POST">
+    <div class="form-group row" style="margin-bottom: 0;">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <div class="row">
+          <div class="col-12"><input style="padding: 6px 12px;border-bottom: 0;border-bottom-left-radius: 0;border-bottom-right-radius: 0" type="text" class="form-control" placeholder="Course Instructor" name="review[prof_name]"></div>
+        </div>
+      </div>
+      <div class="col-4"></div>
+      
+    </div>
+    <div class="form-group row" style="margin-top: 0;">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <div class="row">
+          <div class="col-12"><input style="border-top-left-radius: 0;border-top-right-radius: 0" type="text" class="form-control" placeholder="review" id="inputPassword" name="review[text]"></div>
+        </div>
+      </div>
+      <div class="col-4"></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-4"></div>
+      <div class="col-4">
+          <div><button class="btn btn-lg btn-primary btn-block">Add Review</button></div>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </form>
+</div>
+
+<%- include('./partials/footer') %>

@@ -2,131 +2,48 @@
 <body class = "page">
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-5"><%=course.title%></h1>
-      <p class="lead">Introduction to professional engineering, including ethics, health and safety, roles and responsibilities to society, sustainability, communication; design approaches, and teamworking.</p>
+      <h1 class="display-5" style="color: white;"><%=course.title%></h1>
+      <p class="lead" style="color: white;"><%=course.description%></p>
     </div>
   </div>
-  <div class="container">
-    <div class="card">
-      <div class="card-body">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <h5 class="card-title">Review title goes here</h5>
-            <div class="row">
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted">Prof name goes here</h6>
-              </div>
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted float-right">Username goes here</h6>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <p class="card-text">Comments on the course content, structure, prof(s), and other suggestions or tips.</p>
-          </li>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-body">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <h5 class="card-title">Review title goes here</h5>
-            <div class="row">
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted">Prof name goes here</h6>
-              </div>
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted float-right">Username goes here</h6>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <p class="card-text">Comments on the course content, structure, prof(s), and other suggestions or tips.</p>
-          </li>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <h5 class="card-title">Review title goes here</h5>
-            <div class="row">
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted">Prof name goes here</h6>
-              </div>
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted float-right">Username goes here</h6>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <p class="card-text">Comments on the course content, structure, prof(s), and other suggestions or tips.</p>
-          </li>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <h5 class="card-title">Review title goes here</h5>
-            <div class="row">
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted">Prof name goes here</h6>
-              </div>
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted float-right">Username goes here</h6>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <p class="card-text">Comments on the course content, structure, prof(s), and other suggestions or tips.</p>
-          </li>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <h5 class="card-title">Review title goes here</h5>
-            <div class="row">
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted">Prof name goes here</h6>
-              </div>
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted float-right">Username goes here</h6>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <p class="card-text">Comments on the course content, structure, prof(s), and other suggestions or tips.</p>
-          </li>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <h5 class="card-title">Review title goes here</h5>
-            <div class="row">
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted">Prof name goes here</h6>
-              </div>
-              <div class="col-6">
-                <h6 class="card-subtitle mb-2 text-muted float-right">Username goes here</h6>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <p class="card-text">Comments on the course content, structure, prof(s), and other suggestions or tips.</p>
-          </li>
+  <div class="row">
+    <div class="container">
+      <span style="float: left; font-weight: bold;font-size: 30px;">Reviews</span>  
+      <div style="float: right;">
+        <a style="margin-bottom: 32px" href="/courses/<%=course._id%>/reviews/new" class="btn btn-success">Add a review</a>
       </div>
     </div>
   </div>
+  <% course.reviews.forEach(function(review){ %>
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <h5 class="card-title"><%= review.author.username %></h5>
+              <div class="row">
+                <div class="col-6">
+                  <h6 class="card-subtitle mb-2 text-muted"><%= review.prof_name %></h6>
+                </div>
+                <div class="col-6" style="float: right;">
+                  <% if(currentUser && review.author.id.equals(currentUser._id)){ %>
+                    <a class="btn btn-xs btn-warning" href="/courses/<%=course._id %>/reviews/<%=review._id %>/edit">Edit</a>
+                    <form id="delete-form" action="/courses/<%=course._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
+                        <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                    </form>
+                <% } %>
+                </div>
+                
+              </div>
+            </li>
+            <li class="list-group-item">
+              <p class="card-text"><%= review.text %></p>
+            </li>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+  
 </body>
 
 <%- include('./partials/footer') %>

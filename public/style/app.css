@@ -24,15 +24,13 @@ body{
   color:white;
   font-size: large;
 }
-
-
-
-
-
 .card, .list-group-item{
-  background-color: lightblue;
+  background-color: #ffbf3d;
 }
 
 a:hover{
   color: navy;
+}
+#delete-form {
+  display: inline;
 }

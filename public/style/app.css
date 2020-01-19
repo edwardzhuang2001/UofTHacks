@@ -1,13 +1,42 @@
 body{
-  background-color: orange;
+  background-color: white;
 }
 .black-header{
   color: black;
 }
 
 .jumbotron{
-  background-color: orange;
+  background-color: 	#940049;
 }
+.jumbotron-c{
+  background-color: 	white;
+  padding-top: 30px;
+}
+
+.display-4c{
+  color:white;
+  font-size: 75px;
+  font-weight: 100;
+}
+
+.leadc{
+  color:white;
+  font-size: large;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 56px;
+  background-color: #343A40;
+  text-align: center;
+  padding-top: 15px ;
+  color: aliceblue;
+}
+
+
+
 
 .card, .list-group-item{
   background-color: lightblue;

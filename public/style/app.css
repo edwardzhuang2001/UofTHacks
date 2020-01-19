@@ -9,7 +9,7 @@ body{
   background-color: orange;
 }
 
-.card{
+.card, .list-group-item{
   background-color: lightblue;
 }
 

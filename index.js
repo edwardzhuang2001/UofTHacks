@@ -51,6 +51,16 @@ app.get("/courses", function(req, res){
     }
   })
 })
+app.get("/courses/:id",function(req, res){
+  Course.findById(req.params.id, function(err,foundCourse){
+    if(err){
+      console.log(err)
+    }
+    else{
+      res.render("course",{course: foundCourse})
+    }
+  })
+})
 app.get("/new", function(req, res){
   res.render("new")
 })
@@ -58,7 +68,8 @@ app.post("/new", function(req, res){
   var newCourse = new Course({
     title: req.body.title,
     prof_name: req.body.prof_name,
-    course_code: req.body.course_code
+    course_code: req.body.course_code,
+    description: req.body.description
   })
   Course.create(newCourse, function(err, newCourse){
     if(err){

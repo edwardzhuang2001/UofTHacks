@@ -7,7 +7,9 @@ var express = require("express")
     LocalStrategy = require("passport-local")
     passport = require("passport")
     flash = require("connect-flash")
-    
+    Course = require("./models/course")
+    Review = require("./models/review")
+
 mongoose.connect("mongodb://localhost/work",{ useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -38,6 +40,35 @@ app.get("/",function(req, res){
 })
 app.get("/1p03",function(req,res){
   res.render("1P03")
+})
+app.get("/courses", function(req, res){
+  Course.find({}, function(err, foundCourses){
+    if(err){
+      console.log(err)
+    }
+    else{
+      res.render("courses", {courses:foundCourses})
+    }
+  })
+})
+app.get("/new", function(req, res){
+  res.render("new")
+})
+app.post("/new", function(req, res){
+  var newCourse = new Course({
+    title: req.body.title,
+    prof_name: req.body.prof_name,
+    course_code: req.body.course_code
+  })
+  Course.create(newCourse, function(err, newCourse){
+    if(err){
+      console.log(err)
+    }
+    else{
+      req.flash("success", "Added course sucessfully")
+      res.redirect("/")
+    }
+  })
 })
 app.get("/signup", function(req,res){
   res.render("register")
